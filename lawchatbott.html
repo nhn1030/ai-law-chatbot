@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률 챗봇 웹사이트</title>
+    <style>
+        body {
+            margin: 0;
+            /* 바깥 여백 제거 */
+            padding: 0;
+            /* 내부 여백 제거 */
+            font-family: 'Sora', sans-serif;
+            /* 폰트 설정 */
+        }
+
+        header {
+            background: white; /* 배경색 설정 */
+            border-bottom: 1px solid #AEAEAE; /* 하단 테두리 설정 */
+        }
+    
+        /* 헤더 컨텐츠 스타일 설정 */
+        .header-content {
+            display: flex;
+            justify-content: space-between; /* 요소들을 양쪽 끝에 배치 */
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* 로고와 제목을 왼쪽 정렬 */
+        }
+    
+        .logo {
+            margin-right: 20px; /* 로고 오른쪽 여백 설정 */
+        }
+        
+        /* 네비게이션 메뉴 스타일 설정 */
+        nav {
+            flex: 1; /* 네비게이션 바에 공간 할당 */
+            display: flex;
+            justify-content: center; /* 네비게이션 바를 중앙에 배치 */
+        }
+        
+        nav ul {
+            list-style: none; /* 리스트 마크 제거 */
+            display: flex; /* 내부 요소를 가로로 배열 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            padding: 0; /* 기본 패딩 제거 */
+            margin: 0; /* 기본 마진 제거 */
+        }
+    
+        nav ul li {
+            margin-left: 20px; /* 메뉴 아이템 사이 여백 설정 */
+        }
+    
+        nav a {
+            text-decoration: none; /* 텍스트에 밑줄 제거 */
+            color: #121212; /* 텍스트 색상 설정 */
+            font-size: 20px; /* 폰트 크기 설정 */
+        }
+    
+        hr {
+            margin: 0; /* 가로선 바깥 여백 제거 */
+        }
+
+        .background-image {
+            content: url('https://i.ibb.co/YXQCcPL/image-2.png');
+            width: 100vw;
+            text-align: center;
+            height: 500px;
+            position: absolute;
+            left: 50%;
+            top: 110px;
+            white-space: nowrap;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .Property1Default {
+            color: #121212;
+            text-align: center;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 55.44px;
+            position: absolute;
+            left: 50%;
+            top: 150px;
+            white-space: nowrap;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        
+        .center-text {
+            width: 589px;
+            color: #121212;
+            text-align: center;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 55.44px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 250px;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .input-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 내용물을 중앙에 배치 */
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 55.44px;
+            padding: 10px;
+            margin-top: 300px; /* 상단에 마진 추가 */
+            z-index: 3;
+        }
+
+        .input-box {
+            flex-grow: 0.5;
+            height: 40px;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+            z-index: 3;
+        }
+
+        .custom-text {
+            width: 238px;
+            height: 46px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Sora;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            position: absolute;
+            left: 20px;
+            top: 700px;
+            white-space: nowrap;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px;
+            position: relative;
+            top: 300px;
+        }
+
+        .circle-button {
+            width: 225px;
+            height: 215px;
+            flex-shrink: 0;
+            margin: 5px;
+            display: flex;
+            background-color: #f0f0f0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .circle-button img {
+            width: 50%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .circle-button span {
+            font-size: 1em;
+        }
+
+        .cust-text {
+            width: 238px;
+            height: 46px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Sora;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            position: absolute;
+            left: 20px;
+            top: 1100px;
+            white-space: nowrap;
+        }
+
+        .video-container {
+            position: relative;
+            top: 350px;
+            width: 100%;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .video-container {
+                padding: 10px;
+            }
+        }
+
+        .image-ad img {
+            width: 1440px;
+            height: auto;
+            top: 500px;
+        }
+
+        .image-ad {
+            width: 100vw;
+            height: 500px;
+            position: relative;
+            top: 337px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Rectangle36 {
+            width: 100%;
+            height: 300px;
+            top: 2300px;
+            position: absolute; /* 절대 위치 설정 */
+            background: #383838;
+            display: flex; /* Flexbox 사용 */
+            justify-content: center; /* 가로 방향 중앙 정렬 */
+            align-items: center; /* 세로 방향 중앙 정렬 */
+        }
+
+        .Frame56 {
+            display: flex;
+            margin-left: 500px; /* 왼쪽에 50px 여백 추가 */
+        }
+        
+        body {
+            overflow-x: hidden; /* 수평 스크롤 숨김 */
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-left"></div>
+                <img src="https://i.ibb.co/wMHx6zk/image-1.png" alt="로고" class="logo">
+                <h1>법률챗봇</h1>
+            <nav>
+                <ul>
+                    <li><a href="Untitled-1.html">Homepage</a></li>
+                </ul>
+            </nav>
+        </div>
+        <hr>
+    </header>
+
+    <div class="background-image"></div>
+    <div class="Property1Default">법률 챗봇은 나에게 최적화 된 서비스를 제공합니다</div>
+    <div class="center-text">무엇이든 편하게 물어보세요</div>
+    <div class="input-container">
+        <input type="text" class="input-box" id="user-input" placeholder="질문을 검색해주세요." onkeydown="checkEnterKey(event)">
+    </div>
+
+    <script>
+        function sendChat() {
+            var input = document.getElementById('user-input');
+            var query = input.value.trim();
+    
+            if (query !== '') {
+                // 엔터 키를 누를 때 lawchatbot3.html로 이동하면서 사용자 입력 쿼리를 URL 파라미터로 전달
+                window.location.href = 'lawchatbot3.html?query=' + encodeURIComponent(query);
+            }
+        }
+    
+        function checkEnterKey(event) {
+            if (event.key === 'Enter') {
+                sendChat();
+            }
+        }
+         
+    </script>
+
+    <div class="custom-text">개인 상황 맞춤 AI</div>
+    <div class="button-container">
+            <div class="circle-button" onclick="location.href='lawchatbot2.html'">
+                <img src="https://i.ibb.co/gDYMFRX/image-3.png" alt="임금체불">
+                <span>임금체불</span>
+            </div>
+            <div class="circle-button">
+                <img src="https://i.ibb.co/261whPW/image-4.png" alt="comming soon">
+                <span>comming soon</span>
+            </div>
+            <div class="circle-button">
+                <img src="https://i.ibb.co/261whPW/image-4.png" alt="comming soon">
+                <span>comming soon</span>
+            </div>
+            <div class="circle-button">
+                <img src="https://i.ibb.co/261whPW/image-4.png" alt="comming soon">
+                <span>comming soon</span>
+            </div>
+        </div>
+
+    <div class="cust-text">예시</div>
+    <div class="video-container" style="text-align: center; padding: 20px;">
+        <video width="80%" controls>
+            <source src="video.mp4" type="video/mp4">
+            귀하의 브라우저는 video 태그를 지원하지 않습니다.
+        </video>
+    </div>
+
+    <div class="image-ad">
+        <a href="https://www.yanadoo.co.kr/">
+            <img src="https://i.ibb.co/XYPRbLb/image-5.jpg" alt="광고 이미지">
+        </a>
+    </div>
+
+    <div class="Rectangle36">
+        <div class="Frame56" style="width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; gap: 45px; display: inline-flex">
+            <div class="Frame55" style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 14px; display: inline-flex">
+                <div class="Frame48" style="justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
+                    <img class="Image10" style="width: 59px; height: 43px" src="https://i.ibb.co/wMHx6zk/image-1.png" />
+                    <div style="text-align: center; color: #999999; font-size: 32px; font-family: Sora; font-weight: 600; text-transform: capitalize; word-wrap: break-word">법률챗봇</div>
+                </div>
+                <div class="Copyright2023FrapiskyDesignAllRightsReserved" style="width: 272px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 400; text-transform: capitalize; line-height: 24px; word-wrap: break-word">
+                    Copyright © 2023 Frapisky design. <br/>All Rights reserved
+                </div>
+            </div>
+            <div class="Frame54" style="height: 220px; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                <div class="Frame53" style="width: 195px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                    <div class="Browse" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 400; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Browse</div>
+                    <div class="Frame49" style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                        <div class="Clothings" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Clothings</div>
+                        <div class="Electronics" style="color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Electronics</div>
+                        <div class="Books" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Books</div>
+                        <div class="Furnitures" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Furnitures</div>
+                        <div class="Decorations" style="color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Decorations</div>
+                    </div>
+                </div>
+                <div class="Frame50" style="width: 193px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                    <div class="General" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 400; text-transform: capitalize; line-height: 24px; word-wrap: break-word">General</div>
+                    <div class="Frame49" style="flex-direction: column; justify-content: flex-start; align-items: flex-end; gap: 16px; display: flex">
+                        <div class="Careers" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Careers</div>
+                        <div class="About" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">About</div>
+                        <div class="Twitter" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Twitter</div>
+                        <div class="Linkedin" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">LinkedIn</div>
+                    </div>
+                </div>
+                
+                <!-- Frame51 내용 -->
+                <div class="Frame51" style="width: 193px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                    <div class="Support" style="width: 80px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 400; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Support</div>
+                    <div class="Frame49" style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                        <div class="HelpCenter" style="color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Help Center</div>
+                        <div class="Status" style="width: 92px; color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Status</div>
+                        <div class="SupportEcoswapCo" style="color: #A7A7A7; font-size: 16px; font-family: Inter; font-weight: 500; text-transform: capitalize; line-height: 24px; word-wrap: break-word">support@ecoswap.co</div>
+                    </div>
+    </div>
+</body>

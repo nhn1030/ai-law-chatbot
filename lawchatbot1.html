@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Web Page</title>
+    <style>
+        body {
+            margin: 0; /* 바깥 여백 제거 */
+            padding: 0; /* 내부 여백 제거 */
+            font-family: 'Sora', sans-serif; /* 폰트 설정 */
+        }
+
+        #my-div {
+            width: 100%;
+            height: 100px;
+            background: #FFF;
+        }
+
+        .container {
+            position: relative;
+            height: 100%;
+        }
+
+        .homepage-link,
+        .qa-link {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .homepage-link {
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%);
+        }
+
+        .qa-link {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .homepage-link-text,
+        .qa-link-text {
+            color: #121212;
+            font-size: 20px;
+        }
+
+        .chatbot-box {
+            width: 30%; /* 변경된 너비 */
+            height: auto; /* 자동 높이 */
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #FFF;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 400px;
+            z-index: 2;
+            padding: 10px; /* 내부 패딩 추가 */
+        }
+
+        .chatbot-box input[type="text"] {
+            width: 100%; /* 텍스트 필드 너비를 박스 너비와 동일하게 설정 */
+        }
+
+        .chatbot-box input[type="submit"] {
+            display: none; /* 'Send' 버튼 숨김 */
+        }
+
+        .background-image {
+            content: url('image 2.png');
+            width: 100vw;
+            height: 500px;
+            position: absolute;
+            left: 50%;
+            top: 130px;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .additional-image {
+            width: 88px;
+            height: 77px;
+            flex-shrink: 0;
+            background: url('image 1.png') lightgray 50% / cover no-repeat;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        .chatbot-text {
+            position: absolute;
+            left: 120px;
+            top: 50%;
+            font-size: 20px;
+            color: #121212;
+        }
+
+        .custom-text {
+            width: 238px;
+            height: 46px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Sora;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            position: absolute;
+            left: 20px;
+            top: 800px;
+            white-space: nowrap;
+        }
+
+        .additional-text {
+            width: 589px;
+            color: #121212;
+            text-align: center;
+            font-family: Gmarket Sans TTF;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 55.44px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 300px;
+            white-space: nowrap;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px;
+            position: relative;
+            top: 1000px;
+        }
+
+        .circle-button {
+            width: 225px;
+            height: 215px;
+            flex-shrink: 0;
+            margin: 5px;
+            display: flex;
+            background-color: #f0f0f0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .circle-button img {
+            width: 50%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .circle-button span {
+            font-size: 1em;
+        }
+
+        .image-ad {
+            width: 100vw;
+            height: 500px;
+            position: relative;
+            top: 2000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-ad img {
+            width: 100vw;
+            height: auto;
+        }
+
+        .new-element {
+            width: 1456px;
+            height: 323px;
+            flex-shrink: 0;
+            /* 필요한 경우 추가 스타일링 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="my-div" class="container">
+        <div class="homepage-link">
+            <a href="lawchatbot1.html" class="homepage-link"></a>
+            <button class="button homepage-link-text">Homepage</button>
+        </div>
+        <div class="qa-link">
+            <!-- QA Link content -->
+        </div>
+        <div class="chatbot-box">
+            <form action="lawchatbot3.html" method="get">
+                <input type="text" name="message" onkeypress="return runScript(event)">
+                <input type="submit" value="Send">
+            </form>
+        
+            <script>
+                function runScript(e) {
+                    // 엔터 키가 눌렸을 때
+                    if (e.keyCode == 13) {
+                        // 폼 제출
+                        e.target.form.submit();
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+        </div>
+        <div class="background-image"></div>
+        <div class="additional-image"></div>
+        <div class="chatbot-text">법률챗봇</div>
+        <div class="custom-text">개인 상황 맞춤 AI</div>
+        <div class="additional-text">무엇이든 편하게 물어보세요</div>
+
+        <div class="button-container">
+            <div class="circle-button">
+                <a href="lawchatbot2.html" class="circle-button">
+                    <img src="image 3.png" alt="임금체불">
+                    <span>임금체불</span>
+                </a>
+            </div>
+            <div class="circle-button">
+                <img src="image 4.png" alt="comming soon">
+                <span>comming soon</span>
+            </div>
+            <div class="circle-button">
+                <img src="image 4.png" alt="comming soon">
+                <span>comming soon</span>
+            </div>
+            <div class="circle-button">
+                <img src="image 4.png" alt="comming soon">
+                <span>comming soon</span>
+            </div>
+        </div>
+        <div class="image-ad">
+            <a href="https://www.yanadoo.co.kr/">
+                <img src="image 5.png" alt="광고 이미지">
+            </a>
+        </div>
+</body>
+
+</html>

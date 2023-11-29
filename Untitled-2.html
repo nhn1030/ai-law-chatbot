@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My First Web Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('your-background-image.jpg') center/cover no-repeat fixed;
+      /* 배경 이미지 추가 */
+      overflow: auto;
+      /* 스크롤 활성화 */
+    }
+
+    #my-div {
+      width: 100%;
+      height: 100px;
+      background: #FFF;
+    }
+
+    .container {
+      position: relative;
+      height: 100%;
+    }
+
+    .login-button,
+    .homepage-link,
+    .qa-link {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .login-button {
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .homepage-link {
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%);
+    }
+
+    .qa-link {
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .login-button-text,
+    .homepage-link-text,
+    .qa-link-text {
+      color: #121212;
+      font-size: 16px;
+    }
+
+    .chatbot-box {
+      width: 367px;
+      height: 58px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      border: 1px solid #000;
+      background: #FFF;
+      /* 챗봇 창을 흰색으로 유지 */
+      position: absolute;
+      left: 750px;
+      top: 400px;
+      z-index: 2;
+      /* 챗봇 창을 상위 층위로 올림 */
+    }
+
+    .chatbot-box::before {
+      content: url('p1.png');
+      width: 45px;
+      height: 45px;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* 추가된 이미지 스타일 */
+    .additional-image {
+      width: 88px;
+      height: 77px;
+      flex-shrink: 0;
+      background: url('p2.png') lightgray 50% / cover no-repeat;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+
+    /* 추가된 텍스트 스타일 */
+    .chatbot-text {
+      position: absolute;
+      left: 120px;
+      top: 20px;
+      font-size: 16px;
+      color: #121212;
+    }
+
+    /* 기존 이미지 스타일 */
+    .my-image {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 100px;
+    }
+
+    /* 추가된 텍스트 스타일 */
+    .custom-text {
+      width: 238px;
+      height: 46px;
+      flex-shrink: 0;
+      color: #000;
+      font-family: Sora;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      position: absolute;
+      left: 20px;
+      top: 800px;
+      white-space: nowrap;
+      /* 한 줄로 표시 */
+    }
+
+    /* 추가된 텍스트 스타일 */
+    .additional-text {
+      width: 589px;
+      color: #121212;
+      text-align: center;
+      font-family: Gmarket Sans TTF;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 55.44px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 300px;
+      white-space: nowrap;
+      /* 한 줄로 표시 */
+
+
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .circle {
+      position: relative;
+      width: 225px;
+      height: 215px;
+      Top: 726px;
+      Left: 213px;
+      Border: 0.7px;
+      border-radius: 50%;
+      fill: #FFF;
+      stroke-width: 0.7px;
+      stroke: #000;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .circle img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }  
+
+
+    
+      body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .circle {
+      position: relative;
+      width: 225px;
+      height: 215px;
+      Top: 726px;
+      Left: 477px;
+      Border: 0.7px;
+      border-radius: 50%;
+      fill: #FFF;
+      stroke-width: 0.7px;
+      stroke: #000;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .circle {
+      position: relative;
+      width: 225px;
+      height: 215px;
+      Top: 726px;
+      Left: 477px;
+      Border: 0.7px;
+      border-radius: 50%;
+      fill: #FFF;
+      stroke-width: 0.7px;
+      stroke: #000;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .circle {
+      position: relative;
+      width: 225px;
+      height: 215px;
+      Top: 726px;
+      Left: 741px;
+      Border: 0.7px;
+      border-radius: 50%;
+      fill: #FFF;
+      stroke-width: 0.7px;
+      stroke: #000;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .circle {
+      position: relative;
+      width: 225px;
+      height: 215px;
+      Top: 726px;
+      Left: 1005px;
+      Border: 0.7px;
+      border-radius: 50%;
+      fill: #FFF;
+      stroke-width: 0.7px;
+      stroke: #000;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="my-div" class="container">
+    <div class="login-button">
+      <button class="button login-button-text">Log in</button>
+    </div>
+    <div class="homepage-link">
+      <button class="button homepage-link-text">Homepage</button>
+    </div>
+    <div class="qa-link">
+      <div class="chatbot-box"></div>
+    </div>
+    <!-- 기존 이미지 -->
+    <img class="my-image" src="my-image.jpg" alt="My Image">
+    <!-- 추가된 이미지 -->
+    <div class="additional-image"></div>
+    <!-- 추가된 텍스트 -->
+    <div class="chatbot-text">법률챗봇</div>
+    <!-- 추가된 텍스트 -->
+    <div class="custom-text">개인 상황 맞춤 AI</div>
+    <!-- 추가된 텍스트 -->
+    <div class="additional-text">무엇이든 편하게 물어보세요</div>
+    <div class="circle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="235" height="225" viewBox="0 0 235 225" fill="none">
+        <g filter="url(#filter0_d_332_326)">
+          <ellipse cx="117.5" cy="108.5" rx="112.5" ry="107.5" fill="white" />
+          <path
+            d="M117.5 216.35C179.81 216.35 230.35 168.079 230.35 108.5C230.35 48.9213 179.81 0.65 117.5 0.65C55.1898 0.65 4.65 48.9213 4.65 108.5C4.65 168.079 55.1898 216.35 117.5 216.35Z"
+            stroke="black" stroke-width="0.7" />
+        </g>
+        <defs>
+          <filter id="filter0_d_332_326" x="0.300049" y="0.299988" width="234.4" height="224.4"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha" />
+            <feOffset dy="4" />
+            <feGaussianBlur stdDeviation="2" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_332_326" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_332_326" result="shape" />
+          </filter>
+        </defs>
+      </svg>
+      <img src="your_image_url.jpg" alt="Your Image">
+      <p>임금체불</p>
+    </div>
+    <div class="circle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="235" height="225" viewBox="0 0 235 225" fill="none">
+        <g filter="url(#filter0_d_332_327)">
+          <ellipse cx="117.5" cy="108.5" rx="112.5" ry="107.5" fill="white" />
+          <path
+            d="M117.5 216.35C179.81 216.35 230.35 168.079 230.35 108.5C230.35 48.9213 179.81 0.65 117.5 0.65C55.1898 0.65 4.65 48.9213 4.65 108.5C4.65 168.079 55.1898 216.35 117.5 216.35Z"
+            stroke="black" stroke-width="0.7" />
+        </g>
+        <defs>
+          <filter id="filter0_d_332_327" x="0.300049" y="0.299988" width="234.4" height="224.4"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha" />
+            <feOffset dy="4" />
+            <feGaussianBlur stdDeviation="2" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_332_327" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_332_327" result="shape" />
+          </filter>
+        </defs>
+      </svg>
+      <p>comming soon</p>
+    </div>
+    <div class="circle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="235" height="225" viewBox="0 0 235 225" fill="none">
+        <g filter="url(#filter0_d_338_140)">
+          <ellipse cx="117.5" cy="108.5" rx="112.5" ry="107.5" fill="white"/>
+          <path d="M117.5 216.35C179.81 216.35 230.35 168.079 230.35 108.5C230.35 48.9213 179.81 0.65 117.5 0.65C55.1898 0.65 4.65 48.9213 4.65 108.5C4.65 168.079 55.1898 216.35 117.5 216.35Z" stroke="black" stroke-width="0.7"/>
+        </g>
+        <defs>
+          <filter id="filter0_d_338_140" x="0.300049" y="0.299988" width="234.4" height="224.4" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_338_140"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_338_140" result="shape"/>
+          </filter>
+        </defs>
+      </svg>
+      <p>comming soon</p>
+    </div>
+    <div class="circle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="235" height="225" viewBox="0 0 235 225" fill="none">
+        <g filter="url(#filter0_d_338_143)">
+          <ellipse cx="117.5" cy="108.5" rx="112.5" ry="107.5" fill="white"/>
+          <path d="M117.5 216.35C179.81 216.35 230.35 168.079 230.35 108.5C230.35 48.9213 179.81 0.65 117.5 0.65C55.1898 0.65 4.65 48.9213 4.65 108.5C4.65 168.079 55.1898 216.35 117.5 216.35Z" stroke="black" stroke-width="0.7"/>
+        </g>
+        <defs>
+          <filter id="filter0_d_338_143" x="0.300049" y="0.299988" width="234.4" height="224.4" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_338_143"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_338_143" result="shape"/>
+          </filter>
+        </defs>
+      </svg>
+      <p>comming soon</p>
+    </div>
+  </div>
+</body>
+
+</html>

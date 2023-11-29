@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률챗봇</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* 기본 스타일 */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Sora', sans-serif;
+    }
+
+    header {
+        background: white;
+        border-bottom: 1px solid #AEAEAE;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-right: 20px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin-left: auto;
+    }
+
+    nav ul li {
+        margin-left: 20px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #121212;
+        font-size: 16px;
+    }
+
+    hr {
+        margin: 0;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .question-container {
+        background: white;
+        padding: 20px;
+        width: 60%;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .submit-button {
+        background: #86ACF7;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .submit-button:hover {
+        background: #749bdf;
+    }
+
+    /* 체크박스 항목들을 가로로 배열하기 위한 스타일 */
+    .checkbox-horizontal {
+        display: inline-flexbox;
+        flex-wrap: wrap;
+    }
+
+    .checkbox-horizontal label {
+        margin-right: 10px;
+    }
+
+    .checkbox-horizontal div {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    /* 체크박스와 라벨을 동일한 라인에 배치 */
+    /* .checkbox-horizontal input[type="checkbox"] {
+        margin-right: 5px;
+    } */
+
+    .popup {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 20px;
+        z-index: 100;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .popup-content button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .popup-content button:hover {
+        background-color: #45a049;
+    }
+
+    .chatbot {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .chat-messages {
+        height: 200px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    #chat-input {
+        width: 70%;
+        padding: 5px;
+    }
+
+    #send-message {
+        width: 25%;
+        padding: 5px;
+    }
+</style>
+
+
+<!-- 헤더 섹션: 로고, 타이틀, 내비게이션 링크 포함 -->
+<header>
+    <div class="header-content">
+        <img src="image 1.png" alt="로고" class="logo">
+        <h1>법률챗봇</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="go-to-homepage">홈페이지</a></li>
+                <li><a href="#">질문하기</a></li>
+            </ul>
+        </nav>
+    </div>
+    <hr>
+</header>
+
+<!-- 메인 콘텐츠 섹션 -->
+<main>
+    <h2>간단한 질문사항</h2>
+    <div class="question-container">
+
+        <form>
+            <!-- 나이 입력 -->
+            <div class="question">
+                <label for="age">본인의 나이를 입력해주시기 바랍니다.</label>
+                <input type="text" id="age" name="age" placeholder="만 __세">
+            </div>
+
+            <!-- 근무개월수 입력 -->
+            <div class="question">
+                <label for="months">근무개월수</label>
+                <input type="text" id="months" name="months" placeholder="약 __개월">
+            </div>
+
+            <!-- 주 근무시간 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>주 근무시간</label><br>
+                <div>
+                    <input type="checkbox" id="under15" name="work-hours" value="under15">
+                    <label for="under15">주 15시간 이내</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="15to40" name="work-hours" value="15to40">
+                    <label for="15to40">주 15시간 이상</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="over40" name="work-hours" value="over40">
+                    <label for="over40">주 40시간 이상</label>
+                </div>
+            </div>
+
+            <!-- 근무 유형 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>본인의 근무 유형을 선택해주시기 바랍니다.</label></p>
+                <div>
+                    <input type="checkbox" id="full-time" name="employment-type" value="full-time">
+                    <label for="full-time">정직원</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="part-time" name="employment-type" value="part-time">
+                    <label for="part-time">파트타이머</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="probation" name="employment-type" value="probation">
+                    <label for="probation">수습기간</label>
+                </div>
+            </div>
+
+            <!-- 근로계약서 작성 여부 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>근로계약서 작성 여부</label>
+                <div>
+                    <input type="checkbox" id="written" name="contract" value="written">
+                    <label for="written">작성함</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="not-written" name="contract" value="not-written">
+                    <label for="not-written">작성하지 않음</label>
+                </div>
+            </div>
+
+            <!-- 임금체불 유형 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>본인의 임금체불 유형을 선택해주시기 바랍니다.</label></p>
+                <div>
+                    <input type="checkbox" id="simple-nonpayment" name="wage-issue" value="simple-nonpayment">
+                    <label for="simple-nonpayment">단순임금체불</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="minimum-wage-violation" name="wage-issue" value="minimum-wage-violation">
+                    <label for="minimum-wage-violation">최저임금위반</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="overtime" name="wage-issue" value="overtime">
+                    <label for="overtime">시간 외 수당</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="non-payment-severance" name="wage-issue" value="non-payment-severance">
+                    <label for="non-payment-severance">퇴직금미지급</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="company-closure" name="wage-issue" value="company-closure">
+                    <label for="company-closure">회사 폐업 및 명의 변경</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="other" name="wage-issue" value="other">
+                    <label for="other">기타</label>
+                </div>
+            </div>
+
+
+            <!-- 제출 버튼 -->
+            <button type="submit" class="submit-button">제출하기</button>
+            <div id="popup" class="popup" style="display:none;">
+                <div class="popup-content">
+                    <p>제출되었습니다.</p>
+                    <button type="button" id="close-popup">닫기</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="chatbot">
+        <div class="chat-messages" id="chat-messages"></div>
+        <input type="text" id="chat-input" placeholder="메시지 입력...">
+        <button id="send-message">보내기</button>
+    </div>
+</main>
+<script>
+        document.getElementById('go-to-homepage').addEventListener('click', function() {
+            window.location.href = 'chatbot_page1.html'; // 'next_page.html'은 이동할 페이지의 파일명입니다.
+        });
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // document.getElementById('submit-button').addEventListener('click', function () {
+    //     var age = document.getElementById('age').value;
+    //     var months = document.getElementById('months').value;
+    //     // 기타 필요한 데이터를 가져와서 쿠키에 저장
+    //     // 예: setCookie('age', age, 1);
+    // });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     var submitButton = document.querySelector('.submit-button');
+    //     var closeButton = document.getElementById('close-popup');
+    //     var popup = document.getElementById('popup');
+
+    //     submitButton.addEventListener('click', function (event) {
+    //         event.preventDefault(); // 폼 제출을 방지합니다.
+    //         popup.style.display = 'block'; // 팝업창을 표시합니다.
+    //     });
+
+    //     closeButton.addEventListener('click', function () {
+    //         popup.style.display = 'none'; // 팝업창을 숨깁니다.
+    //     });
+    // });
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var submitButton = document.querySelector('.submit-button');
+        var closeButton = document.getElementById('close-popup');
+        var popup = document.getElementById('popup');
+
+        // 제출하기 버튼 이벤트 리스너
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault(); // 폼 제출을 방지합니다.
+
+            // 폼 데이터 가져오기
+            var age = document.getElementById('age').value;
+            var months = document.getElementById('months').value;
+
+            // 쿠키에 데이터 저장
+            setCookie('age', age, 1);
+            setCookie('months', months, 1);
+
+            // 팝업창 표시
+            popup.style.display = 'block';
+        });
+
+        // 확인 버튼 이벤트 리스너
+        closeButton.addEventListener('click', function () {
+            popup.style.display = 'none'; // 팝업창을 숨깁니다.
+        });
+    });
+
+    document.getElementById('send-message').addEventListener('click', function () {
+        var userMessage = document.getElementById('chat-input').value;
+        var chatMessages = document.getElementById('chat-messages');
+
+        chatMessages.innerHTML += '<div>당신: ' + userMessage + '</div>';
+
+        // 여기서 서버에 사용자 메시지와 쿠키 데이터를 보냅니다.
+        // 서버는 이 데이터를 사용하여 GPT API를 호출하고 응답을 반환합니다.
+        // 반환된 응답을 챗봇 창에 표시합니다.
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var sendMessageButton = document.getElementById('send-message');
+        var chatInput = document.getElementById('chat-input');
+        var chatMessages = document.getElementById('chat-messages');
+
+        sendMessageButton.addEventListener('click', function () {
+            var message = chatInput.value.trim();
+            if (message) {
+                chatMessages.innerHTML += '<div>당신: ' + message + '</div>';
+                chatInput.value = '';
+                // 여기에서 서버에 메시지를 보내고 GPT의 응답을 받아야 합니다.
+                // 이 부분은 서버 측에서 처리해야 합니다.
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률챗봇</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 기본 스타일 설정 */
+        body {
+            margin: 0;
+            /* 바깥 여백 제거 */
+            padding: 0;
+            /* 내부 여백 제거 */
+            font-family: 'Sora', sans-serif;
+            /* 폰트 설정 */
+        }
+
+        /* 헤더 스타일 설정 */
+        header {
+            background: white;
+            /* 배경색 설정 */
+            border-bottom: 1px solid #AEAEAE;
+            /* 하단 테두리 설정 */
+        }
+
+        /* 헤더 컨텐츠 스타일 설정 */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .left-section,
+        .right-section {
+            flex: 1;
+            /* 좌우 섹션에 유연성 부여 */
+            display: flex;
+            align-items: center;
+        }
+
+        .center-section {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0;
+            display: inline-block;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #121212;
+            font-size: 20px;
+        }
+
+        /* 추가로 모바일 화면이나 작은 화면에서 적절한 레이아웃을 유지하기 위한 미디어 쿼리 */
+        @media screen and (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .center-section {
+                position: static;
+                transform: none;
+            }
+        }
+
+        hr {
+            margin: 0;
+            /* 가로선 바깥 여백 제거 */
+        }
+
+        /* 메인 콘텐츠 스타일 설정 */
+        main {
+            padding: 20px;
+            max-width: 1440px;
+            /* 추가: 최대 너비 설정 */
+            margin: 0 auto;
+            /* 추가: 가운데 정렬 */
+        }
+
+
+        /* 질문 컨테이너 스타일 설정 */
+        .question-container {
+            background: white;
+            padding: 20px;
+            width: 60%;
+            height: 500px;
+            /* 길이를 자동으로 설정 */
+            min-height: 500px;
+            /* 최소 높이 설정 */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            /* 추가: 가운데 정렬 */
+        }
+
+        h2 {
+            font-size: 32px;
+            /* 글자 크기 증가 */
+            margin-bottom: 20px;
+            /* 여백 조정 등 필요한 경우 추가 */
+            /* 기타 스타일링 속성 */
+        }
+
+        .question {
+            margin-bottom: 15px;
+            /* 질문 아이템 사이 여백 설정 */
+            font-size: 20px;
+            /* 폰트 크기를 28px로 증가 */
+            /* 기타 필요한 스타일 속성 */
+        }
+
+        label {
+            display: inline-block;
+            /* 블록 요소로 설정하여 줄 바꿈 추가 */
+            margin-bottom: 5px;
+            /* 아이템 아래 여백 설정 */
+            font-weight: bold;
+            /* 글꼴 두껍게 설정 */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            /* 너비 100% 설정 */
+            padding: 10px;
+            /* 내부 여백 설정 */
+            border: 1px solid #ddd;
+            /* 테두리 스타일 설정 */
+            border-radius: 4px;
+            /* 테두리 둥글게 설정 */
+            font-size: 18px;
+            /* 폰트 크기 증가 */
+        }
+
+        .submit-button {
+            background: #86ACF7;
+            /* 배경색 설정 */
+            color: white;
+            /* 텍스트 색상 설정 */
+            border: none;
+            /* 테두리 없앰 */
+            padding: 10px 20px;
+            /* 내부 여백 설정 */
+            border-radius: 20px;
+            /* 테두리 둥글게 설정 */
+            cursor: pointer;
+            /* 커서 스타일 설정 */
+            float: right;
+            /* 오른쪽 정렬 */
+            font-size: 20px;
+            /* 폰트 크기 증가 */
+        }
+
+        .submit-button:hover {
+            background: #749bdf;
+            /* 호버 상태 배경색 변경 */
+        }
+
+        /* 가로로 체크박스 항목 배열 스타일 설정 */
+        .checkbox-horizontal {
+            display: inline-flexbox;
+            /* 내부 요소를 가로로 배열 */
+            flex-wrap: wrap;
+            /* 넘칠 경우 줄 바꿈 설정 */
+        }
+
+        .checkbox-horizontal label {
+            margin-right: 10px;
+            /* 체크박스 레이블 오른쪽 여백 설정 */
+        }
+
+        .checkbox-horizontal div {
+            display: flex;
+            /* 내부 요소를 가로로 배열 */
+            align-items: center;
+            /* 요소를 수직 가운데 정렬 */
+            margin-right: 20px;
+            /* 항목 사이 여백 설정 */
+        }
+
+        .popup {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .popup-content button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 20px;
+            /* 폰트 크기 증가 */
+        }
+
+        .popup-content button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<header>
+    <div class="header-content">
+        <div class="left-section">
+            <img src="https://i.ibb.co/wMHx6zk/image-1.png" alt="로고" class="logo">
+            <h1>법률챗봇</h1>
+        </div>
+
+        <nav class="center-section">
+            <ul>
+                <li><a href="lawchatbot.html">Homepage</a></li>
+            </ul>
+        </nav>
+
+    </div>
+    <hr>
+</header>
+
+<!-- 메인 콘텐츠 섹션 -->
+<main>
+    <h2>간단한 질문사항</h2>
+    <div class="question-container">
+
+        <form>
+            <!-- 나이 입력 -->
+            <div class="question">
+                <label for="age">본인의 나이를 입력해주시기 바랍니다.</label>
+                <input type="text" id="age" name="age" placeholder="만 __세">
+            </div>
+
+            <!-- 근무개월수 입력 -->
+            <div class="question">
+                <label for="months">근무개월수</label>
+                <input type="text" id="months" name="months" placeholder="약 __개월">
+            </div>
+
+            <!-- 주 근무시간 라디오 버튼 -->
+            <div class="question">
+                <label>주 근무시간</label>
+                <div>
+                    <input type="radio" id="under15" name="work-hours" value="under15">
+                    <label for="under15">주 15시간 이내</label>
+                    <input type="radio" id="15to40" name="work-hours" value="15to40">
+                    <label for="15to40">주 15시간 이상</label>
+                    <input type="radio" id="over40" name="work-hours" value="over40">
+                    <label for="over40">주 40시간 이상</label>
+                </div>
+            </div>
+
+            <!-- 근무 유형 라디오 버튼 -->
+            <div class="question">
+                <label>본인의 근무 유형을 선택해주시기 바랍니다.</label>
+                <div>
+                    <input type="radio" id="full-time" name="employment-type" value="full-time">
+                    <label for="full-time">정직원</label>
+                    <input type="radio" id="part-time" name="employment-type" value="part-time">
+                    <label for="part-time">파트타이머</label>
+                    <input type="radio" id="probation" name="employment-type" value="probation">
+                    <label for="probation">수습기간</label>
+                </div>
+            </div>
+
+            <!-- 근로계약서 작성 여부 라디오 버튼 -->
+            <div class="question">
+                <label>근로계약서 작성 여부</label>
+                <div>
+                    <input type="radio" id="written" name="contract" value="written">
+                    <label for="written">작성함</label>
+                    <input type="radio" id="not-written" name="contract" value="not-written">
+                    <label for="not-written">작성하지 않음</label>
+                </div>
+            </div>
+
+            <!-- 임금체불 유형 라디오 버튼 -->
+            <div class="question">
+                <label>본인의 임금체불 유형을 선택해주시기 바랍니다.</label>
+                <div>
+                    <input type="radio" id="simple-nonpayment" name="wage-issue" value="simple-nonpayment">
+                    <label for="simple-nonpayment">단순임금체불</label>
+                    <input type="radio" id="minimum-wage-violation" name="wage-issue" value="minimum-wage-violation">
+                    <label for="minimum-wage-violation">최저임금위반</label>
+                    <input type="radio" id="overtime" name="wage-issue" value="overtime">
+                    <label for="overtime">시간 외 수당</label>
+                    <input type="radio" id="non-payment-severance" name="wage-issue" value="non-payment-severance">
+                    <label for="non-payment-severance">퇴직금미지급</label>
+                    <input type="radio" id="company-closure" name="wage-issue" value="company-closure">
+                    <label for="company-closure">회사 폐업 및 명의 변경</label>
+                    <input type="radio" id="other" name="wage-issue" value="other">
+                    <label for="other">기타</label>
+                </div>
+            </div>
+
+
+
+            <!-- 제출 버튼 -->
+            <button type="submit" class="submit-button">제출하기</button>
+            <div id="popup" class="popup" style="display:none;">
+                <div class="popup-content">
+                    <p>제출되었습니다.</p>
+                    <button type="button" id="close-popup" onclick="location.href='lawchatbot3.html'">닫기</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var submitButton = document.querySelector('.submit-button');
+        var closeButton = document.getElementById('close-popup');
+        var popup = document.getElementById('popup');
+
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault(); // 폼 제출을 방지합니다.
+
+            // 각 입력 필드에서 값을 가져옵니다.
+            var age = document.getElementById('age').value;
+            var months = document.getElementById('months').value;
+            var workHours = Array.from(document.querySelectorAll('input[name="work-hours"]:checked')).map(el => el.value);
+            var employmentType = Array.from(document.querySelectorAll('input[name="employment-type"]:checked')).map(el => el.value);
+            var contract = Array.from(document.querySelectorAll('input[name="contract"]:checked')).map(el => el.value);
+            var wageIssue = Array.from(document.querySelectorAll('input[name="wage-issue"]:checked')).map(el => el.value);
+
+            // 쿠키에 데이터 저장
+            document.cookie = "age=" + age + ";path=/";
+            document.cookie = "months=" + months + ";path=/";
+            document.cookie = "workHours=" + JSON.stringify(workHours) + ";path=/";
+            document.cookie = "employmentType=" + JSON.stringify(employmentType) + ";path=/";
+            document.cookie = "contract=" + JSON.stringify(contract) + ";path=/";
+            document.cookie = "wageIssue=" + JSON.stringify(wageIssue) + ";path=/";
+
+            // 팝업창을 표시합니다.
+            popup.style.display = 'block';
+        });
+
+        closeButton.addEventListener('click', function () {
+            popup.style.display = 'none'; // 팝업창을 숨깁니다.
+            window.location.href = 'chatbot_page3hh.html'; // 다음 페이지로 이동
+        });
+    });
+</script>
+</body>
+
+</html>

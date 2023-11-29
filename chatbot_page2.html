@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440, height=896, initial-scale=1.0">
+    <title>노동법 AI 챗봇</title>
+    <style>
+        /* 공통 스타일 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'ABeeZee', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* 컨테이너 스타일 */
+        .container {
+            width: 1440px;
+            height: 896px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 제목 스타일 */
+        .title {
+            font-size: 40px;
+            font-weight: 400;
+            line-height: 50px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 채팅창 스타일 */
+        .chat-box {
+            flex-grow: 1;
+            width: 100%;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 10px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column-reverse; /* 채팅창 내용 역순으로 정렬 */
+        }
+
+        /* 입력창 및 보내기 버튼 컨테이너 스타일 */
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        /* 입력창 스타일 */
+        .input-box {
+            flex-grow: 1;
+            height: 40px;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* 보내기 버튼 스타일 */
+        .send-button {
+            width: 100px;
+            height: 40px;
+            background: #86ACF7;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">노동법 AI 챗봇</div>
+        <div class="chat-box" id="chat-box">
+            <!-- 채팅 내용이 여기에 추가됩니다. -->
+        </div>
+        <div class="input-container">
+            <input type="text" class="input-box" id="user-input" placeholder="채팅을 입력해주세요." onkeydown="if(event.key==='Enter') sendChat()">
+            <button class="send-button" onclick="sendChat()">보내기</button>
+        </div>
+    </div>
+
+    <script>
+        function sendChat() {
+            const userInput = document.getElementById("user-input");
+            const chatBox = document.getElementById("chat-box");
+            const userMessage = userInput.value.trim();
+
+            if (userMessage !== "") {
+                // 사용자 입력을 채팅창에 추가
+                chatBox.innerHTML = `<div class="user-message">${userMessage}</div>` + chatBox.innerHTML;
+
+                // 입력창 비우기
+                userInput.value = "";
+
+                // 채팅창 맨 위로 스크롤
+                chatBox.scrollTop = 0;
+            }
+        }
+    </script>
+</body>
+</html>

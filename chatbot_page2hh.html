@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률챗봇</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 기본 스타일 설정 */
+        body {
+            margin: 0;
+            /* 바깥 여백 제거 */
+            padding: 0;
+            /* 내부 여백 제거 */
+            font-family: 'Sora', sans-serif;
+            /* 폰트 설정 */
+        }
+
+        /* 헤더 스타일 설정 */
+        header {
+            background: white;
+            /* 배경색 설정 */
+            border-bottom: 1px solid #AEAEAE;
+            /* 하단 테두리 설정 */
+        }
+
+        /* 헤더 컨텐츠 스타일 설정 */
+        .header-content {
+            display: flex;
+            /* 내부 요소를 가로로 배열 */
+            align-items: center;
+            /* 요소를 수직 가운데 정렬 */
+            padding: 10px;
+            /* 내부 여백 설정 */
+        }
+
+        .logo {
+            margin-right: 20px;
+            /* 로고 오른쪽 여백 설정 */
+        }
+
+        /* 네비게이션 메뉴 스타일 설정 */
+        nav ul {
+            list-style: none;
+            /* 리스트 마크 제거 */
+            display: flex;
+            /* 내부 요소를 가로로 배열 */
+            margin-left: 650px;
+            /* 왼쪽 여백 설정 */
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            /* 메뉴 아이템 사이 여백 설정 */
+        }
+
+        nav a {
+            text-decoration: none;
+            /* 텍스트에 밑줄 제거 */
+            color: #121212;
+            /* 텍스트 색상 설정 */
+            font-size: 16px;
+            /* 폰트 크기 설정 */
+        }
+
+        hr {
+            margin: 0;
+            /* 가로선 바깥 여백 제거 */
+        }
+
+        /* 메인 콘텐츠 스타일 설정 */
+        main {
+            padding: 20px;
+            max-width: 1440px;
+            /* 추가: 최대 너비 설정 */
+            margin: 0 auto;
+            /* 추가: 가운데 정렬 */
+        }
+
+
+        /* 질문 컨테이너 스타일 설정 */
+        .question-container {
+            background: white;
+            padding: 20px;
+            width: 60%;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            /* 추가: 가운데 정렬 */
+        }
+
+
+        .question {
+            margin-bottom: 15px;
+            /* 질문 아이템 사이 여백 설정 */
+        }
+
+        label {
+            display: inline-block;
+            /* 블록 요소로 설정하여 줄 바꿈 추가 */
+            margin-bottom: 5px;
+            /* 아이템 아래 여백 설정 */
+            font-weight: bold;
+            /* 글꼴 두껍게 설정 */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            /* 너비 100% 설정 */
+            padding: 10px;
+            /* 내부 여백 설정 */
+            border: 1px solid #ddd;
+            /* 테두리 스타일 설정 */
+            border-radius: 4px;
+            /* 테두리 둥글게 설정 */
+        }
+
+        .submit-button {
+            background: #86ACF7;
+            /* 배경색 설정 */
+            color: white;
+            /* 텍스트 색상 설정 */
+            border: none;
+            /* 테두리 없앰 */
+            padding: 10px 20px;
+            /* 내부 여백 설정 */
+            border-radius: 20px;
+            /* 테두리 둥글게 설정 */
+            cursor: pointer;
+            /* 커서 스타일 설정 */
+            float: right;
+            /* 오른쪽 정렬 */
+        }
+
+        .submit-button:hover {
+            background: #749bdf;
+            /* 호버 상태 배경색 변경 */
+        }
+
+        /* 가로로 체크박스 항목 배열 스타일 설정 */
+        .checkbox-horizontal {
+            display: inline-flexbox;
+            /* 내부 요소를 가로로 배열 */
+            flex-wrap: wrap;
+            /* 넘칠 경우 줄 바꿈 설정 */
+        }
+
+        .checkbox-horizontal label {
+            margin-right: 10px;
+            /* 체크박스 레이블 오른쪽 여백 설정 */
+        }
+
+        .checkbox-horizontal div {
+            display: flex;
+            /* 내부 요소를 가로로 배열 */
+            align-items: center;
+            /* 요소를 수직 가운데 정렬 */
+            margin-right: 20px;
+            /* 항목 사이 여백 설정 */
+        }
+
+        .popup {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .popup-content button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .popup-content button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<header>
+    <div class="header-content">
+        <img src="image 1.png" alt="로고" class="logo">
+        <h1>법률챗봇</h1>
+        <nav>
+            <ul>
+                <li><a href="chatbot_page1.html">Homepage</a></li>
+            </ul>
+        </nav>
+    </div>
+    <hr>
+</header>
+
+<!-- 메인 콘텐츠 섹션 -->
+<main>
+    <h2>간단한 질문사항</h2>
+    <div class="question-container">
+
+        <form>
+            <!-- 나이 입력 -->
+            <div class="question">
+                <label for="age">본인의 나이를 입력해주시기 바랍니다.</label>
+                <input type="text" id="age" name="age" placeholder="만 __세">
+            </div>
+
+            <!-- 근무개월수 입력 -->
+            <div class="question">
+                <label for="months">근무개월수</label>
+                <input type="text" id="months" name="months" placeholder="약 __개월">
+            </div>
+
+            <!-- 주 근무시간 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>주 근무시간</label>
+                <div>
+                    <input type="checkbox" id="under15" name="work-hours" value="under15">
+                    <label for="under15">주 15시간 이내</label>
+                    <input type="checkbox" id="15to40" name="work-hours" value="15to40">
+                    <label for="15to40">주 15시간 이상</label>
+                    <input type="checkbox" id="over40" name="work-hours" value="over40">
+                    <label for="over40">주 40시간 이상</label>
+                </div>
+            </div>
+
+            <!-- 근무 유형 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>본인의 근무 유형을 선택해주시기 바랍니다.</label>
+                <div>
+                    <input type="checkbox" id="full-time" name="employment-type" value="full-time">
+                    <label for="full-time">정직원</label>
+                    <input type="checkbox" id="part-time" name="employment-type" value="part-time">
+                    <label for="part-time">파트타이머</label>
+                    <input type="checkbox" id="probation" name="employment-type" value="probation">
+                    <label for="probation">수습기간</label>
+                </div>
+            </div>
+
+            <!-- 근로계약서 작성 여부 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>근로계약서 작성 여부</label>
+                <div>
+                    <input type="checkbox" id="written" name="contract" value="written">
+                    <label for="written">작성함</label>
+                    <input type="checkbox" id="not-written" name="contract" value="not-written">
+                    <label for="not-written">작성하지 않음</label>
+                </div>
+            </div>
+
+            <!-- 임금체불 유형 체크박스 (가로 배열) -->
+            <div class="question checkbox-horizontal">
+                <label>본인의 임금체불 유형을 선택해주시기 바랍니다.</label>
+                <div>
+                    <input type="checkbox" id="simple-nonpayment" name="wage-issue" value="simple-nonpayment">
+                    <label for="simple-nonpayment">단순임금체불</label>
+                    <input type="checkbox" id="minimum-wage-violation" name="wage-issue" value="minimum-wage-violation">
+                    <label for="minimum-wage-violation">최저임금위반</label>
+                    <input type="checkbox" id="overtime" name="wage-issue" value="overtime">
+                    <label for="overtime">시간 외 수당</label>
+                    <input type="checkbox" id="non-payment-severance" name="wage-issue" value="non-payment-severance">
+                    <label for="non-payment-severance">퇴직금미지급</label>
+                    <input type="checkbox" id="company-closure" name="wage-issue" value="company-closure">
+                    <label for="company-closure">회사 폐업 및 명의 변경</label>
+                    <input type="checkbox" id="other" name="wage-issue" value="other">
+                    <label for="other">기타</label>
+                </div>
+            </div>
+
+
+            <!-- 제출 버튼 -->
+            <button type="submit" class="submit-button">제출하기</button>
+            <div id="popup" class="popup" style="display:none;">
+                <div class="popup-content">
+                    <p>제출되었습니다.</p>
+                    <button type="button" id="close-popup" onclick="location.href='chatbot_page3hh.html'">닫기</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+    function handleSubmit(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
+
+        // 폼 데이터 읽기
+        var age = document.getElementById('age').value;
+        var months = document.getElementById('months').value;
+        const workHours = Array.from(document.querySelectorAll('input[name="work-hours"]:checked')).map(el => el.value);
+        const employmentType = Array.from(document.querySelectorAll('input[name="employment-type"]:checked')).map(el => el.value);
+        const contract = Array.from(document.querySelectorAll('input[name="contract"]:checked')).map(el => el.value);
+        const wageIssue = Array.from(document.querySelectorAll('input[name="wage-issue"]:checked')).map(el => el.value);
+
+
+        // 쿠키에 데이터 저장
+        document.cookie = "age=" + age + ";path=/";
+        document.cookie = "months=" + months + ";path=/";
+        document.cookie = "workHours=" + JSON.stringify(workHours) + ";path=/";
+        document.cookie = "employmentType=" + JSON.stringify(employmentType) + ";path=/";
+        document.cookie = "contract=" + JSON.stringify(contract) + ";path=/";
+        document.cookie = "wageIssue=" + JSON.stringify(wageIssue) + ";path=/";
+
+
+        // 다음 페이지로 이동
+        window.location.href = 'chatbot_page3hh.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+        form.addEventListener('submit', handleSubmit);
+    });
+</script>
+</body>
+
+</html>
